@@ -7,7 +7,7 @@
     ["caliban", HUB + "caliban/"],
     ["prospero", HUB + "prospero/"],
     ["gonzalo", HUB + "gonzalo/"],
-    ["updates", HUB + "updates/index.html"],
+    ["updates", HUB + "updates/"],
   ];
   var bar = document.createElement("div");
   bar.className = "caliban-ai-banner";
@@ -22,5 +22,7 @@
       bar.appendChild(s);
     }
   });
-  document.body.insertBefore(bar, document.body.firstChild);
+  if (document.body) {
+    document.body.insertBefore(bar, document.body.firstChild);
+  }
 })();
