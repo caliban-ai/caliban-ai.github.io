@@ -1,0 +1,19 @@
+[book]
+title = "caliban-ai"
+description = "The caliban-ai org hub — project directory and development updates."
+authors = ["caliban-ai"]
+language = "en"
+src = "src"
+
+[build]
+build-dir = "book"
+create-missing = false
+
+[output.html]
+git-repository-url = "https://github.com/caliban-ai/caliban-ai.github.io"
+preferred-dark-theme = "navy"
+additional-css = ["theme/caliban-ai.css"]
+additional-js = ["theme/nav.js"]
+
+[output.html.search]
+enable = true
