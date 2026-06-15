@@ -1,0 +1,16 @@
+/* Shared caliban-ai brand accents. Consumed by the hub and every project site. */
+:root {
+  --caliban-accent: #5b8def;
+}
+.caliban-ai-banner {
+  font-size: 0.85rem;
+  padding: 0.35rem 1rem;
+  background: var(--caliban-accent);
+  color: #fff;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.caliban-ai-banner a { color: #fff; text-decoration: none; font-weight: 600; }
+.caliban-ai-banner a:hover { text-decoration: underline; }
+.caliban-ai-banner .spacer { flex: 1; }
