@@ -114,10 +114,16 @@ mkdir -p "$SRC_DIR/updates"
 post="$SRC_DIR/updates/${DATE}-board-review.md"
 emit_post > "$post"
 
-# Insert the nested SUMMARY entry right after the marker (newest first).
+# Insert the nested SUMMARY entry right after the marker (newest first), idempotently.
 entry="  - [${DATE} — Board review](./updates/${DATE}-board-review.md)"
-awk -v e="$entry" '{print} /<!-- updates -->/{print e}' "$SUMMARY" > "$SUMMARY.tmp"
-mv "$SUMMARY.tmp" "$SUMMARY"
+if ! grep -qF -- "<!-- updates -->" "$SUMMARY"; then
+  echo "error: updates marker '<!-- updates -->' not found in $SUMMARY" >&2
+  exit 1
+fi
+if ! grep -qF -- "$entry" "$SUMMARY"; then
+  awk -v e="$entry" '{print} /<!-- updates -->/{print e}' "$SUMMARY" > "$SUMMARY.tmp"
+  mv "$SUMMARY.tmp" "$SUMMARY"
+fi
 
 # Rewrite the snapshot to the current full Done set.
 mkdir -p "$(dirname "$STATE_FILE")"

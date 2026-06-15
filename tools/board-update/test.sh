@@ -39,4 +39,33 @@ else
 fi
 rm -rf "$tmp"
 
+# Test 5: idempotency — re-running on the same date inserts the SUMMARY entry only once.
+tmp="$(mktemp -d)"
+mkdir -p "$tmp/src/updates" "$tmp/state"
+cp src/SUMMARY.md "$tmp/src/SUMMARY.md"
+state="$tmp/state/done-snapshot.json"
+cp "$FIX/prev-snapshot.json" "$state"
+"$DIR/generate.sh" --input "$FIX/board.json" --state "$state" --date 2026-06-14 --out-dir "$tmp/src" --summary "$tmp/src/SUMMARY.md" >/dev/null
+"$DIR/generate.sh" --input "$FIX/board.json" --state "$state" --date 2026-06-14 --out-dir "$tmp/src" --summary "$tmp/src/SUMMARY.md" >/dev/null
+entry_n="$(grep -c '2026-06-14-board-review.md' "$tmp/src/SUMMARY.md")"
+if [[ "$entry_n" -eq 1 ]]; then
+  echo "PASS: SUMMARY insert is idempotent (1 entry)"
+else
+  echo "FAIL: SUMMARY has $entry_n entries (expected 1)"; fail=1
+fi
+rm -rf "$tmp"
+
+# Test 6: missing marker — generate.sh exits non-zero when SUMMARY lacks the marker.
+tmp="$(mktemp -d)"
+mkdir -p "$tmp/src/updates" "$tmp/state"
+printf '# Summary\n\n- [Intro](./intro.md)\n' > "$tmp/src/SUMMARY.md"
+state="$tmp/state/done-snapshot.json"
+cp "$FIX/prev-snapshot.json" "$state"
+if "$DIR/generate.sh" --input "$FIX/board.json" --state "$state" --date 2026-06-14 --out-dir "$tmp/src" --summary "$tmp/src/SUMMARY.md" >/dev/null 2>&1; then
+  echo "FAIL: generate.sh succeeded despite missing marker"; fail=1
+else
+  echo "PASS: generate.sh fails on missing marker"
+fi
+rm -rf "$tmp"
+
 exit $fail
