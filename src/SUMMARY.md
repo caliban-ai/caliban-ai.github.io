@@ -12,3 +12,4 @@
 
 - [Development Updates](./updates/index.md)
 <!-- updates -->
+  - [2026-06-15 — Board review](./updates/2026-06-15-board-review.md)
