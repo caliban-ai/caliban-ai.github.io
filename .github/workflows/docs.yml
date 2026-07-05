@@ -10,6 +10,13 @@ on:
 permissions:
   contents: read
 
+# Serialize Pages deploys: `cancel-in-progress: false` lets an in-flight deploy
+# finish while later runs queue, avoiding the flaky "Deployment failed, try
+# again later" collision from concurrent deploys.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 env:
   MDBOOK_VERSION: "0.4.52"
 
