@@ -4,17 +4,17 @@ _Auto-generated draft. Review and edit before publishing._
 
 ## Snapshot
 
-- Total tracked: 5
-- Done: 3
+- Open items tracked: 4
 - Backlog: 2
+- In progress: 1
+- In review: 1
 
 ## By project
 
-| Project | Done | Backlog |
-|---------|------|---------|
-| caliban | 1 | 2 |
-| gonzalo | 1 | 0 |
-| prospero | 1 | 0 |
+| Project | Backlog | In progress | In review |
+|---------|---------|-------------|-----------|
+| caliban | 2 | 1 | 0 |
+| gonzalo | 0 | 0 | 1 |
 
 ## Landed since last review (2)
 

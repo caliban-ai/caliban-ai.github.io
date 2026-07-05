@@ -1,9 +1,6 @@
-{
-  "items": [
-    {"content":{"number":1,"repository":"caliban-ai/caliban","title":"Feature A","url":"https://github.com/caliban-ai/caliban/issues/1","type":"Issue"},"status":"Done","labels":["kind/feature","caliban"]},
-    {"content":{"number":2,"repository":"caliban-ai/caliban","title":"Bug B","url":"https://github.com/caliban-ai/caliban/issues/2","type":"Issue"},"status":"Backlog","labels":["kind/bug","caliban"]},
-    {"content":{"number":3,"repository":"caliban-ai/prospero","title":"Cleanup C","url":"https://github.com/caliban-ai/prospero/issues/3","type":"Issue"},"status":"Done","labels":["kind/cleanup","prospero"]},
-    {"content":{"number":4,"repository":"caliban-ai/gonzalo","title":"Feature D","url":"https://github.com/caliban-ai/gonzalo/issues/4","type":"Issue"},"status":"Done","labels":["kind/feature","gonzalo"]},
-    {"content":{"number":5,"repository":"caliban-ai/caliban","title":"Feature E","url":"https://github.com/caliban-ai/caliban/issues/5","type":"Issue"},"status":"Backlog","labels":["kind/feature","caliban"]}
-  ]
-}
+[
+  {"content":{"number":2,"repository":"caliban-ai/caliban","title":"Bug B","url":"https://github.com/caliban-ai/caliban/issues/2","type":"Issue"},"status":"Backlog","labels":["kind/bug","caliban"]},
+  {"content":{"number":5,"repository":"caliban-ai/caliban","title":"Feature E","url":"https://github.com/caliban-ai/caliban/issues/5","type":"Issue"},"status":"Backlog","labels":["kind/feature","caliban"]},
+  {"content":{"number":6,"repository":"caliban-ai/caliban","title":"Feature F","url":"https://github.com/caliban-ai/caliban/issues/6","type":"Issue"},"status":"In progress","labels":["kind/feature","caliban"]},
+  {"content":{"number":7,"repository":"caliban-ai/gonzalo","title":"Feature G","url":"https://github.com/caliban-ai/gonzalo/issues/7","type":"Issue"},"status":"In review","labels":["kind/feature","gonzalo"]}
+]
