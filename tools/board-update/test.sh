@@ -7,7 +7,7 @@ FIX="$DIR/fixtures"
 fail=0
 
 # Test 1: dry-run output matches the golden post exactly.
-out="$("$DIR/generate.sh" --input "$FIX/board.json" --state "$FIX/prev-snapshot.json" --date 2026-06-14 --dry-run)"
+out="$("$DIR/generate.sh" --board-input "$FIX/board.json" --issues-input "$FIX/closed-issues.json" --state "$FIX/prev-snapshot.json" --date 2026-06-14 --dry-run)"
 if diff <(printf '%s\n' "$out") "$FIX/expected-post.md"; then
   echo "PASS: dry-run golden output"
 else
@@ -20,7 +20,7 @@ mkdir -p "$tmp/src/updates" "$tmp/state"
 cp src/SUMMARY.md "$tmp/src/SUMMARY.md"
 state="$tmp/state/done-snapshot.json"
 cp "$FIX/prev-snapshot.json" "$state"
-"$DIR/generate.sh" --input "$FIX/board.json" --state "$state" --date 2026-06-14 --out-dir "$tmp/src" --summary "$tmp/src/SUMMARY.md" >/dev/null
+"$DIR/generate.sh" --board-input "$FIX/board.json" --issues-input "$FIX/closed-issues.json" --state "$state" --date 2026-06-14 --out-dir "$tmp/src" --summary "$tmp/src/SUMMARY.md" >/dev/null
 if [[ -f "$tmp/src/updates/2026-06-14-board-review.md" ]]; then
   echo "PASS: post file written"
 else
@@ -28,7 +28,7 @@ else
 fi
 snap_n="$(jaq 'length' "$state")"
 if [[ "$snap_n" -eq 3 ]]; then
-  echo "PASS: snapshot rewritten to full Done set (3)"
+  echo "PASS: snapshot rewritten to full closed-issue set (3)"
 else
   echo "FAIL: snapshot has $snap_n entries (expected 3)"; fail=1
 fi
@@ -45,8 +45,8 @@ mkdir -p "$tmp/src/updates" "$tmp/state"
 cp src/SUMMARY.md "$tmp/src/SUMMARY.md"
 state="$tmp/state/done-snapshot.json"
 cp "$FIX/prev-snapshot.json" "$state"
-"$DIR/generate.sh" --input "$FIX/board.json" --state "$state" --date 2026-06-14 --out-dir "$tmp/src" --summary "$tmp/src/SUMMARY.md" >/dev/null
-"$DIR/generate.sh" --input "$FIX/board.json" --state "$state" --date 2026-06-14 --out-dir "$tmp/src" --summary "$tmp/src/SUMMARY.md" >/dev/null
+"$DIR/generate.sh" --board-input "$FIX/board.json" --issues-input "$FIX/closed-issues.json" --state "$state" --date 2026-06-14 --out-dir "$tmp/src" --summary "$tmp/src/SUMMARY.md" >/dev/null
+"$DIR/generate.sh" --board-input "$FIX/board.json" --issues-input "$FIX/closed-issues.json" --state "$state" --date 2026-06-14 --out-dir "$tmp/src" --summary "$tmp/src/SUMMARY.md" >/dev/null
 entry_n="$(grep -c '2026-06-14-board-review.md' "$tmp/src/SUMMARY.md")"
 if [[ "$entry_n" -eq 1 ]]; then
   echo "PASS: SUMMARY insert is idempotent (1 entry)"
@@ -61,7 +61,7 @@ mkdir -p "$tmp/src/updates" "$tmp/state"
 printf '# Summary\n\n- [Intro](./intro.md)\n' > "$tmp/src/SUMMARY.md"
 state="$tmp/state/done-snapshot.json"
 cp "$FIX/prev-snapshot.json" "$state"
-if "$DIR/generate.sh" --input "$FIX/board.json" --state "$state" --date 2026-06-14 --out-dir "$tmp/src" --summary "$tmp/src/SUMMARY.md" >/dev/null 2>&1; then
+if "$DIR/generate.sh" --board-input "$FIX/board.json" --issues-input "$FIX/closed-issues.json" --state "$state" --date 2026-06-14 --out-dir "$tmp/src" --summary "$tmp/src/SUMMARY.md" >/dev/null 2>&1; then
   echo "FAIL: generate.sh succeeded despite missing marker"; fail=1
 else
   echo "PASS: generate.sh fails on missing marker"
