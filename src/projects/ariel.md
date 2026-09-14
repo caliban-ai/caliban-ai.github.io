@@ -3,6 +3,7 @@
 The chat bridge for the caliban fleet: notifications, commands, approvals, and
 conversation in Discord, Slack, and Teams.
 
+- **Site:** <https://caliban-ai.github.io/ariel/>
 - **Repo:** <https://github.com/caliban-ai/ariel>
 - **Issues:** <https://github.com/caliban-ai/ariel/issues>
 - **Board:** <https://github.com/orgs/caliban-ai/projects/1>
@@ -34,5 +35,5 @@ the lower of the two wins.
 The daemon does not yet wire the chat backend to prospero and gonzalo, so no
 layer is usable end to end.
 
-The architecture decisions live in the repo's
-[ADR log](https://github.com/caliban-ai/ariel/tree/main/docs/adr).
+The guide, architecture decisions, and API reference live on the
+[project site](https://caliban-ai.github.io/ariel/).

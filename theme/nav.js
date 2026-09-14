@@ -7,6 +7,7 @@
     ["caliban", HUB + "caliban/"],
     ["prospero", HUB + "prospero/"],
     ["gonzalo", HUB + "gonzalo/"],
+    ["ariel", HUB + "ariel/"],
     ["updates", HUB + "updates/"],
   ];
   var bar = document.createElement("div");
