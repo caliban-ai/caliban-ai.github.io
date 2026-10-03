@@ -19,21 +19,28 @@ channel configuration, and the audit trail are [gonzalo](./gonzalo.md) records,
 so ariel stores nothing of its own. Chat platforms sit behind a single
 `ChatProvider` trait, and each backend is a feature-gated crate.
 
-The bridge is planned in four layers, each shippable on its own: notifications,
-approvals, ChatOps slash commands, and full conversational sessions. Commands are
-authorized on two keys, a person's role and a ceiling set on the channel, and
-the lower of the two wins.
+The bridge is built in four layers, each shippable on its own: notifications,
+ChatOps slash commands, approvals, and full conversational sessions. Commands
+are authorized on two keys, a person's role and a ceiling set on the channel,
+and the lower of the two wins.
 
-**Status: early implementation.** Several building blocks are on `main`:
-- the prospero client, which polls the fleet and fans in each agent's SSE stream
-- the `ChatProvider` trait, with an in-memory console provider
-- the renderer that turns an agent's state into chat messages
-- a Discord backend on twilight, passing the shared provider contract suite
-- the `arield` daemon, with environment configuration, token files, a health
-  endpoint, and a container image
+**Status: released and running.** Every release is the multi-arch container
+image `ghcr.io/caliban-ai/ariel`.
 
-The daemon does not yet wire the chat backend to prospero and gonzalo, so no
-layer is usable end to end.
+Working today, on Discord:
+- **Notifications.** One live message per agent, paced per channel.
+- **ChatOps.** `/ariel status` and `/ariel spawn` act on the fleet; `/ariel kill`
+  and `/ariel respawn` deal with a stray agent; `/ariel channel`,
+  `/ariel configure`, and `/ariel invite` handle channel administration and
+  onboarding from chat.
+- **Authorization and audit.** Every command is authorized on the person's role
+  and the channel's ceiling, and audited in gonzalo. Nobody can invite above the
+  role they act with.
+- **Operations.** Channel configuration is picked up while the daemon runs, and
+  `arield` speaks TLS, so it can reach a prosperod through an ingress.
+
+Still to come: approvals with buttons, a chat thread as a full agent session,
+and the Slack and Teams backends.
 
 The guide, architecture decisions, and API reference live on the
 [project site](https://caliban-ai.github.io/ariel/).
