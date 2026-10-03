@@ -9,11 +9,15 @@ fleets of agents across repositories.
 - **Board:** <https://github.com/orgs/caliban-ai/projects/1>
 
 prospero sits above many per-repo `caliband` daemons. The `prosperod` daemon
-serves a REST + SSE API and a dashboard, secured by scoped API tokens. Through
-it you spawn agents (in isolated git worktrees by default), kill, respawn, and
-remove them, and follow their normalized event streams live. Those events are
-also persisted, so history outlives the agent. prospero couples to caliban only
-through caliban's NDJSON wire format, and its public HTTP API is what
+serves a REST + SSE API and a dashboard, secured by scoped API tokens. Every
+route but the probes is guarded by named API tokens carrying a read, operate, or
+admin scope, and the dashboard signs in with one. Through it you spawn agents (in
+isolated git worktrees by default), kill, respawn, and remove them, and follow
+their normalized event streams live. Those events are
+also persisted, so history outlives the agent. On Kubernetes it reports each agent's
+lifecycle back to [caliban-operator](./caliban-operator.md) by writing a
+condition on the `CalibanTask`. prospero couples to caliban only through
+caliban's NDJSON wire format, and its public HTTP API is what
 [ariel](./ariel.md) builds on.
 
 The full guide, architecture decisions, and API reference live on the

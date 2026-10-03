@@ -11,6 +11,8 @@ your own terms:
   versioned records over pluggable stores, plus vector search and a code graph.
 - **[ariel](./projects/ariel.md)** — the chat bridge that brings the fleet into
   Discord, with Slack and Teams to follow.
+- **[caliban-operator](./projects/caliban-operator.md)** — the Kubernetes
+  operator that runs agents as sandboxed pods.
 
 ## How they fit together
 
@@ -18,11 +20,22 @@ your own terms:
 Discord / Slack / Teams
         │
       ariel ──── HTTP + SSE ───▶ prospero ── NDJSON ──▶ caliband ─▶ caliban agents
-        │                           │                                   │
-        └──────── records ───────▶ gonzalo ◀──────── memory, sessions ──┘
+        │                           │                        ▲
+        │                           │ CalibanTask CRs         │ sandboxed pods
+        │                           ▼                        │
+        │                    caliban-operator ───────────────┘
+        │                           │
+        └──────── records ───────▶ gonzalo ◀──── memory, sessions
 ```
 
 Each project couples to its neighbours only through a public wire format or API,
 never through another project's crates, so each can be run and released on its own.
+
+## Running the suite
+
+- **Kubernetes:** the [helm-charts](https://github.com/caliban-ai/helm-charts)
+  repo packages the operator, prospero, gonzalo, and ariel.
+- **Docker Compose:** the [docker-compose](https://github.com/caliban-ai/docker-compose)
+  repo is a self-host stack for a single machine.
 
 See **[Development Updates](./updates/index.md)** for board-review progress reports.

@@ -13,7 +13,10 @@ Google Gemini through one internal representation. Bedrock, Vertex, and Azure
 adapters are available through the library. You can drive it from a ratatui TUI,
 headless `--print` mode, or as an ACP, HTTP, or MCP server. Sessions,
 checkpoints and forking, auto-memory, sub-agents, a background agent fleet,
-hooks, skills, permissions, and an OS sandbox all ship today. Its per-repo supervisor daemon, `caliband`, is what
+hooks, skills, permissions, and an OS sandbox all ship today. Recent releases
+gave the agent loop model-adaptive turn, time, and cost budgets, and folded
+configuration into one layered settings system with provenance, so router
+config and `CALIBAN_*` environment overrides no longer sit outside it. Its per-repo supervisor daemon, `caliband`, is what
 [prospero](./prospero.md) orchestrates.
 
 The full user guide, architecture decisions, and API reference live on the
