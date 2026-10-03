@@ -28,11 +28,12 @@ and the lower of the two wins.
 image `ghcr.io/caliban-ai/ariel`.
 
 Working today, on Discord:
-- **Notifications.** One live message per agent, paced per channel.
-- **ChatOps.** `/ariel status` and `/ariel spawn` act on the fleet; `/ariel kill`
-  and `/ariel respawn` deal with a stray agent; `/ariel channel`,
-  `/ariel configure`, and `/ariel invite` handle channel administration and
-  onboarding from chat.
+- **Notifications.** One live message per agent, edited in place and paced
+  against the platform's budget, in every channel that follows that agent's
+  workspace.
+- **ChatOps.** Eight `/ariel` commands: `link`, `status`, `spawn`, `kill`,
+  `respawn`, `channel`, `configure`, and `invite`, so fleet control and channel
+  administration both happen in chat.
 - **Authorization and audit.** Every command is authorized on the person's role
   and the channel's ceiling, and audited in gonzalo. Nobody can invite above the
   role they act with.
