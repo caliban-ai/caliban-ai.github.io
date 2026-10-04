@@ -8,6 +8,7 @@
 - [prospero](./projects/prospero.md)
 - [gonzalo](./projects/gonzalo.md)
 - [ariel](./projects/ariel.md)
+- [caliban-operator](./projects/caliban-operator.md)
 
 # Updates
 
