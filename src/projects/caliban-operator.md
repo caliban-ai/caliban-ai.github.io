@@ -3,6 +3,7 @@
 The Kubernetes operator for caliban agent workloads: a `CalibanTask` CRD
 composed with agent-sandbox.
 
+- **Site:** <https://caliban-ai.github.io/caliban-operator/>
 - **Repo:** <https://github.com/caliban-ai/caliban-operator>
 - **Issues:** <https://github.com/caliban-ai/caliban-operator/issues>
 - **Board:** <https://github.com/orgs/caliban-ai/projects/1>
@@ -21,5 +22,7 @@ underneath it. The operator owns the sandbox pod lifecycle, RBAC, and
 NetworkPolicy; live agent streaming goes straight to `caliband` instead of
 through the operator.
 
-The CRDs and their reconcile loops are implemented. The accepted decisions live
-in the repo's [ADR log](https://github.com/caliban-ai/caliban-operator/tree/main/docs/adr).
+The CRDs and their reconcile loops are implemented.
+
+The full guide, architecture decisions, and API reference live on the
+[project site](https://caliban-ai.github.io/caliban-operator/).
